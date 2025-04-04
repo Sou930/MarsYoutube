@@ -1,1 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <style>
+    body {
+      background-color: #808080;
+      font-family: Arial, sans-serif;
+    }
 
+    form {
+      width: 400px;
+      padding: 40px 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background-color: #000;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    form h1, form p {
+      color: white;
+      font-weight: 500;
+    }
+
+    form p {
+      font-size: 10px;
+    }
+
+    form input[type="text"], form input[type="password"] {
+      border: 0;
+      background: none;
+      display: block;
+      margin: 20px auto;
+      border: 2px solid #ff69b4;
+      padding: 15px 10px;
+      width: 200px;
+      outline: none;
+      border-radius: 24px;
+      transition: 0.25s;
+      text-align: center;
+    }
+
+    form input[type="text"]:focus, form input[type="password"]:focus {
+      width: 280px;
+      background-color: #f0f8ff;
+    }
+
+    form input[type="submit"] {
+      border: 0;
+      background: none;
+      display: block;
+      margin: 20px auto;
+      border: 2px solid #f0f8ff;
+      padding: 15px 10px;
+      width: 200px;
+      outline: none;
+      color: white;
+      border-radius: 25px;
+      transition: 0.25s;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    form input[type="submit"]:hover {
+      background-color: #ff69b4;
+      border: 2px solid #ff69b4;
+    }
+
+    #error_message {
+      color: red;
+      font-size: 12px;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <form name="login_form" onsubmit="return validateForm()">
+    <div class="login_form_top">
+      <h1>LOGIN</h1>
+      <p>UserID、Passwordをご入力の上、「LOGIN」ボタンをクリックしてください。</p>
+    </div>
+    <div class="login_form_btm">
+      <input type="text" name="user_id" placeholder="UserID">
+      <input type="password" name="password" placeholder="Password">
+      <input type="submit" value="LOGIN">
+      <p id="error_message">Invalid Password</p>
+    </div>
+  </form>
+
+  <script>
+    function validateForm() {
+      // ユーザーIDとパスワードを取得
+      const userId = document.login_form.user_id.value;
+      const password = document.login_form.password.value;
+
+      // 正しいパスワード（ユーザーIDは自由）
+      const validPassword = "SouMars";
+
+      // パスワードが一致するかチェック
+      if (password === validPassword) {
+        // パスワードが一致した場合、main.htmlにリダイレクト
+        window.location.href = "templates/home.html";
+        return false;  // フォーム送信を防ぎ、リダイレクト
+      } else {
+        // パスワードが間違っている場合、エラーメッセージを表示
+        document.getElementById("error_message").style.display = "block";
+        return false;  // フォーム送信を防ぐ
+      }
+    }
+  </script>
+</body>
+</html>
